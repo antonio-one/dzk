@@ -138,12 +138,12 @@ def kafka_admin_client(broker: Container) -> AdminClient:
     has_started = False
     kafka_logs = set()
     while not has_started:
-        log_line = str(broker.logs(tail=1))
+        log_line = broker.logs(tail=1).decode("UTF-8").strip()
         if log_line in kafka_logs:
             pass
         else:
             kafka_logs.add(log_line)
-            logger.info(log_line.strip())
+            logger.info(log_line)
         if "INFO Kafka startTimeMs" in log_line:
             has_started = True
             logging.info("Kafka has started")
