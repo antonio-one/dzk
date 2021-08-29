@@ -12,7 +12,7 @@ def produce(broker_conf: Dict[str, str], topic: str, message: bytes):
             logging.error(f"Message failed delivery: {_error}\n")
         else:
             logging.info(
-                f"Message delivered to {_message.topic()} [{_message.partition()}] @ {_message.offset()}\n"
+                f"Message delivered to {_message.topic()} [{_message.partition()}] @ offset {_message.offset()}\n"
             )
 
     try:
